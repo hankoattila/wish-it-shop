@@ -6,6 +6,8 @@ import com.codecool.wishit.utils.Path;
 import com.codecool.wishit.utils.RequestUtil;
 import com.codecool.wishit.utils.SessionData;
 import com.google.gson.Gson;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,16 +53,17 @@ public class OrderController {
     }
 
     @PostMapping(value = Path.Web.ADD_TO_CART)
-    public String handleAddToCart(@RequestParam("product_id") int productId) {
+    public ResponseEntity<String> handleAddToCart(@RequestParam("product_id") int productId) {
 
         User user = sessionData.getUser();
 
         Product product = productService.getProductById(productId);
-        return orderService.handleAddToCart(user, product);
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(orderService.handleAddToCart(user, product), HttpStatus.OK);
+        return responseEntity;
     }
 
     @PostMapping(value = Path.Web.REMOVE_FROM_CART)
-    public String handleRemoveFromCart(@RequestParam("product_id") int productId) {
+    public @ResponseBody String handleRemoveFromCart(@RequestParam("product_id") int productId) {
 
         User user = sessionData.getUser();
 

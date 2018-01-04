@@ -59,8 +59,6 @@ public class OrderService {
             return null;
         }
 
-        Gson gson = new Gson();
-
         final String URI = "http://192.168.161.184:8080/api/add-to-cart";
 
         String response;
@@ -81,7 +79,8 @@ public class OrderService {
         }
 
         System.out.println(response);
-        return gson.fromJson(response, String.class);
+        System.out.println(response.length());
+        return response;
     }
 
     public Order handleRemoveFromCart(User user, Product product) {

@@ -10,8 +10,7 @@ app.dataHandler = {
             method: 'POST',
             dataType: 'json',
             data: {
-                product_id: productId,
-                quantity: quantity
+                product_id: productId
             },
             success: function(response) {
                 app.productLogic.handleAddToCartSuccess(response, productId);

@@ -11,7 +11,6 @@ public class Order {
     private int userId;
     private Status status;
     private List<LineItem> items;
-    private Date closedDate;
 
     // Checkout (billing/shipping) information
     private float totalPrice;
@@ -58,10 +57,6 @@ public class Order {
 
     public List<LineItem> getItems() {
         return items;
-    }
-
-    public Date getClosedDate() {
-        return closedDate;
     }
 
     public float getTotalPrice() {
@@ -130,10 +125,6 @@ public class Order {
 
     public void setItems(List<LineItem> items) {
         this.items = items;
-    }
-
-    public void setClosedDate(Date closedDate) {
-        this.closedDate = closedDate;
     }
 
     public void setTotalPrice(float totalPrice) {

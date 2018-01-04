@@ -20,6 +20,7 @@ app.productLogic = {
     },
 
     handleAddToCartSuccess: function (response, productId) {
+        console.log(response);
         if (response === "new_item") {
             app.utils.toastMessage("New item successfully added to cart.");
             var cartItemCount = $("#cart-item-count");
