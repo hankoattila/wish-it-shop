@@ -17,7 +17,8 @@
         <form id="list-by-category" action="/filter" method="GET" class="form">
             <label for="category-selection">Choose a category:</label>
             <select id="category-selection" name="category" onchange="this.form.submit()">
-                <option value=""></option>
+                <option value="">-- all products --</option>
+                <!--<option selected disabled>Choose one category to filter</option>-->
                 <option th:each="type : ${types}" th:attr="value=${type}" th:text="${type}"
                         th:selected="(${categoryFilter} == ${type}) ? 'selected' : 'false'">Categories</option>
             </select>
@@ -27,9 +28,9 @@
 
     </div>
 
-    <div class="well well-sm" th:if="${categoryFilter}">
-        <strong th:text="${categoryFilter}">Category Title</strong>
-    </div>
+    <!--<div class="well well-sm" th:if="${categoryFilter}">-->
+        <!--<strong th:text="${categoryFilter}">Category Title</strong>-->
+    <!--</div>-->
 
     <div id="products" class="row list-group">
 
