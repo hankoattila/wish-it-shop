@@ -22,13 +22,16 @@ import java.util.Map;
 @Service
 public class OrderService {
 
+    private final String LOCAL_URL = "http://192.168.161.184:8080/";
+    private final String HEROKU_URL = "http://wishit-order-service.herokuapp.com/";
+
     public Order getOpenOrder(User user) {
 
         if (user == null) {
             return null;
         }
 
-        final String URI = String.format("http://192.168.161.184:8080/order/%d", user.getUserId());
+        final String URI = String.format(LOCAL_URL + "order/%d", user.getUserId());
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -61,7 +64,7 @@ public class OrderService {
 
         Gson gson = new Gson();
 
-        final String URI = "http://192.168.161.184:8080/api/add-to-cart";
+        final String URI = LOCAL_URL + "api/add-to-cart";
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -92,7 +95,7 @@ public class OrderService {
 
         Gson gson = new Gson();
 
-        final String URI = "http://192.168.161.184:8080/api/remove-from-cart";
+        final String URI = LOCAL_URL + "api/remove-from-cart";
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -117,7 +120,7 @@ public class OrderService {
 
     public void setOrderStatusToPaid(Integer orderId) {
 
-        final String URI = "http://192.168.161.184:8080/api/set-order-to-paid";
+        final String URI = LOCAL_URL + "api/set-order-to-paid";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
