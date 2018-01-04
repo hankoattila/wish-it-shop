@@ -2,19 +2,20 @@ package com.codecool.wishit.controller;
 
 import com.codecool.wishit.model.Order;
 import com.codecool.wishit.model.Product;
+import com.codecool.wishit.model.Review;
 import com.codecool.wishit.model.User;
 import com.codecool.wishit.service.OrderService;
 import com.codecool.wishit.service.ProductService;
+import com.codecool.wishit.service.ReviewService;
 import com.codecool.wishit.service.UserService;
 import com.codecool.wishit.utils.Path;
 import com.codecool.wishit.utils.RequestUtil;
 import com.codecool.wishit.utils.SessionData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,6 +38,9 @@ public class ProductController {
     private OrderService orderService;
     private RequestUtil requestUtil;
     private ProductService productService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     public ProductController(SessionData sessionData, UserService userService, OrderService orderService, RequestUtil requestUtil, ProductService productService) {
         this.sessionData = sessionData;
@@ -113,6 +117,17 @@ public class ProductController {
         Product product = new Product(name, type, description, imageFile.getName(), price);
         productService.saveProduct(product, 2);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/products/{productId}")
+    public String productDetails(Model model,
+                                 @PathVariable("productId") Integer productId) {
+        Product product = productService.getProductById(productId);
+        List<Review> reviews = reviewService.getReviewsByProductId(productId);
+        System.out.println(reviews);
+        model.addAttribute(product);
+        model.addAttribute(reviews);
+        return "product-details";
     }
 
 }

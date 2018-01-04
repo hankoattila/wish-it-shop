@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <title>Product Details</title>
+</head>
+
+<body>
+
+<th:block layout:fragment="content">
+
+    <div class="container card">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <h2 id="headertext" class="col-md-8 text-center-small">Product Details</h2>
+        </div>
+        <div class="row product-container clearfix">
+            <a th:href="${product.imageFileName}">
+                <img class="text-left col-md-6 col-sm-12 vehicleimage-sm" th:src="'/img/' + ${product.imageFileName}"
+                     alt="${product.name}">
+            </a>
+            <div class="product-detail col-md-6 col-sm-12">
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">Name:</div>
+                    <div class="col-xs-6 col-md-8" th:text="${product.name}">Name</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">Type:</div>
+                    <div class="col-xs-6 col-md-8" th:text="${product.type}">Type</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">Description:</div>
+                    <div class="col-xs-6 col-md-8" th:text="${product.description}">Description</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">Price:</div>
+                    <div class="col-xs-6 col-md-8" th:text="${product.price}">Price</div>
+                </div>
+            </div>
+            <div>
+                <form class="review-form" th:action="'/review/'+${product.id}" method="post">
+                    <h3 class="col-xs-12">Add a review:</h3>
+                    <div class="row container-fluid">
+                        <div class="col col-sm-6 text-left ">
+                            <div class="review-label">Start date</div>
+                            <input id="startDate" class="col col-sm-6 form-control review-input" type="date"
+                                   name="reservation_startdate">
+                        </div>
+                        <div class="col col-sm-6 pull-right-custom form-group">
+                            <div class="review-label">End date</div>
+                            <input id="endDate" class="col col-sm-6 form-control review-input" type="date"
+                                   name="reservation_enddate">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 form-group">
+                        <input value="I want this vehicle" type="submit" class="btn btn-info reserve-button"
+                               src="index.html">
+                    </div>
+                </form>
+            </div>
+            <div th:each="review : ${reviews}">
+                <h4>Reviews:</h4>;
+                <p th:text="${review.text}"></p>
+                <p th:text="${review.star}"></p>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+
+</html>

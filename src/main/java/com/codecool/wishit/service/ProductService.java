@@ -1,6 +1,7 @@
 package com.codecool.wishit.service;
 
 import com.codecool.wishit.model.Product;
+import com.codecool.wishit.utils.Path;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ public class ProductService {
         try {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<Product[]> response =
-                    restTemplate.getForEntity("http://localhost:60005/products", Product[].class);
+                    restTemplate.getForEntity(Path.MicroServices.PRODUCT_SERVICE + "/products", Product[].class);
             return Arrays.asList(response.getBody());
         } catch (ResourceAccessException e) {
             System.out.println("Product Service is unavailable: " + e);
@@ -45,7 +46,7 @@ public class ProductService {
         try {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<Product[]> response =
-                    restTemplate.getForEntity("http://localhost:60005/products/type?typeName=" + type, Product[].class);
+                    restTemplate.getForEntity(Path.MicroServices.PRODUCT_SERVICE + "/products/type?typeName=" + type, Product[].class);
             return Arrays.asList(response.getBody());
         } catch (ResourceAccessException e) {
             System.out.println("Product Service is unavailable: " + e);
@@ -77,7 +78,7 @@ public class ProductService {
             params.add("defaultCurrency", "HUF");
 
             HttpEntity<?> request = new HttpEntity<>(params, headers);
-            restTemplate.postForLocation("http://localhost:60005/" + userId + "/products", request);
+            restTemplate.postForLocation(Path.MicroServices.PRODUCT_SERVICE + "/" + userId + "/products", request);
         } catch (ResourceAccessException e) {
             System.out.println("Product Service is unavailable: " + e);
         }
@@ -90,6 +91,19 @@ public class ProductService {
             types.add(product.getType());
         }
         return types;
+    }
+
+    public Product getProductById(Integer productId) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<Product> response =
+                    restTemplate.getForEntity(Path.MicroServices.PRODUCT_SERVICE + "/products/" + productId, Product.class);
+            return response.getBody();
+        } catch (ResourceAccessException e) {
+            System.out.println("Product Service is unavailable: " + e);
+            return null;
+        }
+
     }
 
 }
