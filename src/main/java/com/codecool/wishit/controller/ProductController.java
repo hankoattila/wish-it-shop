@@ -125,8 +125,8 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         List<Review> reviews = reviewService.getReviewsByProductId(productId);
         System.out.println(reviews);
-        model.addAttribute(product);
-        model.addAttribute(reviews);
+        model.addAttribute("product", product);
+        model.addAttribute("reviews", reviews);
         return "product-details";
     }
 

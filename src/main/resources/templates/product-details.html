@@ -45,26 +45,31 @@
                     <h3 class="col-xs-12">Add a review:</h3>
                     <div class="row container-fluid">
                         <div class="col col-sm-6 text-left ">
-                            <div class="review-label">Start date</div>
-                            <input id="startDate" class="col col-sm-6 form-control review-input" type="date"
-                                   name="reservation_startdate">
+                            <div class="review-label">Your opinion:</div>
+                            <input id="startDate" class="col col-sm-6 form-control review-input" type="text"
+                                   name="text">
                         </div>
                         <div class="col col-sm-6 pull-right-custom form-group">
-                            <div class="review-label">End date</div>
-                            <input id="endDate" class="col col-sm-6 form-control review-input" type="date"
-                                   name="reservation_enddate">
+                            <div class="review-label">Stars:</div>
+                            <select class="form-control" id="star-selection" name="star">
+                                <option th:each="i : ${#numbers.sequence(1, 5)}" th:attr="value=${i}" th:text="${i}">Star values</option>
+                            </select>
+                            <!--<input id="endDate" class="col col-sm-6 form-control review-input" type="text"-->
+                                   <!--name="reservation_enddate">-->
                         </div>
                     </div>
                     <div class="col-xs-12 form-group">
-                        <input value="I want this vehicle" type="submit" class="btn btn-info reserve-button"
+                        <input value="Send review" type="submit" class="btn btn-info send-button"
                                src="index.html">
                     </div>
                 </form>
             </div>
-            <div th:each="review : ${reviews}">
-                <h4>Reviews:</h4>;
-                <p th:text="${review.text}"></p>
-                <p th:text="${review.star}"></p>
+            <div class="col-xs-12">
+                <h4>Reviews:</h4>
+                <div th:each="review : ${reviews}">
+                    <p th:text="${review.text}"></p>
+                    <span th:text="${review.star}"></span>
+                </div>
             </div>
         </div>
     </div>
