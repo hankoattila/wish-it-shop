@@ -51,6 +51,7 @@ public class OrderController {
     }
 
     @PostMapping(value = Path.Web.ADD_TO_CART)
+    @ResponseBody
     public String handleAddToCart(@RequestParam("product_id") int productId) {
 
         User user = sessionData.getUser();
@@ -60,6 +61,7 @@ public class OrderController {
     }
 
     @PostMapping(value = Path.Web.REMOVE_FROM_CART)
+    @ResponseBody
     public String handleRemoveFromCart(@RequestParam("product_id") int productId) {
 
         User user = sessionData.getUser();
@@ -68,6 +70,7 @@ public class OrderController {
         Order order = orderService.handleRemoveFromCart(user, product);
 
         Map<String, Object> newPrices = new HashMap<>();
+        System.out.println(order==null);
         newPrices.put("total", order.getTotalPrice());
         newPrices.put("cartIsEmpty", order.getItems().isEmpty());
 
