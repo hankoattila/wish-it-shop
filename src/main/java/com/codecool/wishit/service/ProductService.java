@@ -85,7 +85,8 @@ public class ProductService {
             params.add("defaultCurrency", "HUF");
 
             HttpEntity<?> request = new HttpEntity<>(params, headers);
-            restTemplate.postForLocation(Path.MicroServices.PRODUCT_SERVICE + userId + "/products", request);
+            restTemplate.postForLocation(Path.MicroServices.PRODUCT_SERVICE + "/" + userId + "/products", request);
+
         } catch (ResourceAccessException e) {
             System.out.println("Product Service is unavailable: " + e);
         }
@@ -100,25 +101,37 @@ public class ProductService {
         return types;
     }
 
-    public Product getProductById(int productId) {
-
-        final String URI = String.format("http://wishit-product-service.herokuapp.com/products/%d", productId);
-
-        String response;
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-
+//<<<<<<< HEAD
+//    public Product getProductById(int productId) {
+//
+//        final String URI = String.format("http://wishit-product-service.herokuapp.com/products/%d", productId);
+//
+//        String response;
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+//        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+//
+//        try {
+//            response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
+//        } catch (RestClientException e) {
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//
+//        Gson gson = new Gson();
+//        return gson.fromJson(response, Product.class);
+//=======
+    public Product getProductById(Integer productId) {
         try {
-            response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
-        } catch (RestClientException e) {
-            System.out.println(e.getMessage());
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<Product> response =
+                    restTemplate.getForEntity(Path.MicroServices.PRODUCT_SERVICE + "/products/" + productId, Product.class);
+            return response.getBody();
+        } catch (ResourceAccessException e) {
+            System.out.println("Product Service is unavailable: " + e);
             return null;
         }
-
-        Gson gson = new Gson();
-        return gson.fromJson(response, Product.class);
     }
 
 }

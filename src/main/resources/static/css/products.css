@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700|Roboto:300,400,700&subset=latin-ext');
+
 body {
     background-color: #337ab7;
     color: #337ab7;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .jumbotron {
@@ -54,7 +57,7 @@ body {
 
 .card {
     color: #333;
-    background-color: #eee;
+    background-color: white;
     margin: 10px 0;
     padding: 30px;
 
@@ -62,12 +65,13 @@ body {
     -moz-border-radius: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    /*transition: all 0.1s linear;*/
+    transition: all 0.1s linear;
 }
 
 .card:hover {
+    background-color: white;
     text-decoration: none;
-    /*box-shadow: 0 5px 15px #999;*/
+    box-shadow: 0 5px 15px #333;
 }
 
 .thumbnail {
