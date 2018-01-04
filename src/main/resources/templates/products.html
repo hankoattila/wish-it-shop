@@ -12,29 +12,29 @@
 <th:block layout:fragment="content">
 
     <!-- TODO: this can be used for category selection if needed -->
-    <div class="well well-sm text-center form-group">
+    <div class="well well-sm text-center row">
 
-        <form id="list-by-category" action="/filter" method="GET" class="inline-form form-inline">
-            <label for="category-selection">Filter by a category:</label>
+        <form id="list-by-category" action="/filter" method="GET" class="form">
+            <label for="category-selection">Choose a category:</label>
             <select id="category-selection" name="category" onchange="this.form.submit()">
                 <option value=""></option>
                 <option th:each="type : ${types}" th:attr="value=${type}" th:text="${type}"
                         th:selected="(${categoryFilter} == ${type}) ? 'selected' : 'false'">Categories</option>
             </select>
-            <a href="/" class="btn" title="Delete filter">X</a>
+            <a href="/" class="btn delete-filter-button" title="Delete filter">X</a>
             <!--<input type="submit" value="Select" class="select-cat-sup" />-->
         </form>
 
     </div>
 
-    <div class="well well-sm">
-        <strong th:text="${actualSelection}">Category Title</strong>
+    <div class="well well-sm" th:if="${categoryFilter}">
+        <strong th:text="${categoryFilter}">Category Title</strong>
     </div>
 
     <div id="products" class="row list-group">
 
-        <div class="item col-xs-4 col-lg-4" th:each="prod : ${products}">
-            <div class="thumbnail">
+        <div class="item col-xs-4 col-lg-4 equal" th:each="prod : ${products}">
+            <div class="thumbnail card">
                 
                 <!-- Product Image-->
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/' + ${prod.imageFileName}" alt="" />
