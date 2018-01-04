@@ -2,7 +2,10 @@
 var app = app || {};
 
 app.init = function() {
-    /* CALL LOGIC.JS FUNCTIONS HERE */
+
+    app.productLogic.addToCartListener();
+    app.productLogic.reviewRemoveItemListener();
+
 };
 
 $(document).ready(app.init());

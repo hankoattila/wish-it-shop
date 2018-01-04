@@ -5,10 +5,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import com.google.gson.Gson;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
 
+        // TODO: communicate with products-microservice to get all products (which are not reserved)
         // TODO: communicate with products-microservice to get all products (which are not yet sold)
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -90,6 +97,27 @@ public class ProductService {
             types.add(product.getType());
         }
         return types;
+    }
+
+    public Product getProductById(int productId) {
+
+        final String URI = String.format("http://wishit-product-service.herokuapp.com/products/%d", productId);
+
+        String response;
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+
+        try {
+            response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
+        } catch (RestClientException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        Gson gson = new Gson();
+        return gson.fromJson(response, Product.class);
     }
 
 }

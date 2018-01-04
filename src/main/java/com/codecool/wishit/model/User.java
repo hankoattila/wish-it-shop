@@ -19,6 +19,9 @@ public class User {
     private String shippingZipCode;
     private String shippingAddress;
 
+    public User() {
+    }
+
     public User(String fullName, String email, String password) {
         this.fullName = fullName;
         this.email = email;
