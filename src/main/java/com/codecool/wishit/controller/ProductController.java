@@ -40,7 +40,7 @@ public class ProductController {
         Order order = orderService.getOpenOrder(user);
 
         model.addAttribute("loggedIn", user != null);
-        model.addAttribute("userName", user != null ? user.getFullName() : null);
+        model.addAttribute("fullName", user != null ? user.getFullName() : null);
         model.addAttribute("orderStatus", order != null ? order.getStatus().toString() : null);
         model.addAttribute("cartItems", order != null ? order.countCartItems() : 0);
     }

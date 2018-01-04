@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <title>Cash Payment</title>
+</head>
+
+<body>
+
+<th:block layout:fragment="content">
+
+    <div class="well well-sm">
+        <strong>Cash Payment - Order Closed</strong>
+    </div>
+
+    <div id="success" class="row list-group">
+
+        <div class="col-xs-12 col-lg-12">
+
+            <div class="row">
+                <div class="col-xs-offset-2 col-xs-8">
+
+                    <p class="text-justify">Your order was successfully closed. We are going to process your order. You will be able to pay with cash at the selected delivery address. Thank you for choosing us!</p>
+
+                    <div class="text-center"><a class="text-center btn btn-success" th:href="@{~/}">Back to Index</a></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</th:block>
+
+</body>
+
+</html>

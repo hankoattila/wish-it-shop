@@ -9,11 +9,13 @@ import com.codecool.wishit.utils.RequestUtil;
 import com.codecool.wishit.utils.SessionData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,14 +42,14 @@ public class UserController {
         Order order = orderService.getOpenOrder(user);
 
         model.addAttribute("loggedIn", user != null);
-        model.addAttribute("userName", user != null ? user.getFullName() : null);
+        model.addAttribute("fullName", user != null ? user.getFullName() : null);
         model.addAttribute("orderStatus", order != null ? order.getStatus().toString() : null);
         model.addAttribute("cartItems", order != null ? order.countCartItems() : 0);
     }
 
     @GetMapping(value = Path.Web.REGISTER)
     public String serveRegistrationPage(Model model){
-        model.addAttribute("user", requestUtil.collectRegistrationData(new HashMap<>()));
+        model.addAttribute("user", new User());
 
         return Path.Template.REGISTER;
     }
@@ -59,14 +61,19 @@ public class UserController {
     }
 
     @PostMapping(value = Path.Web.REGISTER)
-    public String handleRegistration(Model model, @RequestParam Map<String, String> formData){
+    public String handleRegistration(Model model,
+                                     @RequestParam MultiValueMap<String, String> formData,
+                                     @RequestParam Map<String, String> userData){
 
-        List<String> errorMessages = userService.validateRegistrationInput(formData);
+        System.out.println("IN POST REGISTER METHOD");
+
+        List<String> errorMessages = userService.doRegistration(formData);
 
         // IN CASE OF INVALID INPUT, RE-RENDER REGISTRATION PAGE
-        if (errorMessages.size() > 0) {
+        if (errorMessages != null) {
+            System.out.println(errorMessages);
             model.addAttribute("errors", errorMessages);
-            model.addAttribute("user", formData);
+            model.addAttribute("user", userData);
 
             return Path.Template.REGISTER;
         }
@@ -75,10 +82,10 @@ public class UserController {
     }
 
     @PostMapping(Path.Web.LOGIN)
-    public String handleLogin(@RequestParam Map<String, String> form, Model model) {
+    public String handleLogin(Model model, @RequestParam MultiValueMap<String, String> formData) {
 
-        Map<String, String> inputData = requestUtil.collectLoginData(form);
-        User user = userService.validateLoginCredentials(inputData);
+        //Map<String, String> inputData = requestUtil.collectLoginData(formData);
+        User user = userService.validateLoginCredentials(formData);
 
         // INVALID LOGIN CREDENTIALS - RE-RENDER LOGIN PAGE
         if (user == null) {
@@ -93,7 +100,7 @@ public class UserController {
         return "redirect:" + Path.Web.PRODUCTS;
     }
 
-    @GetMapping(Path.Web.LOGOUT)
+    @PostMapping(Path.Web.LOGOUT)
     public String handleLogout() {
 
         sessionData.clear();
@@ -115,19 +122,28 @@ public class UserController {
     }
 
     @PostMapping(value = Path.Web.USER_PROFILE)
-    public String handleUserProfileUpdate(Model model, @RequestParam Map<String, String> formData) {
+    public String handleUserProfileUpdate(Model model,
+                                          @RequestParam MultiValueMap<String, String> formData,
+                                          @RequestParam Map<String, String> userData) {
 
         User user = sessionData.getUser();
 
-        List<String> errorMessages = userService.update(user, formData);
+        Map<String, Object> response = userService.update(user, formData);
+        List<String> errorMessages = (ArrayList<String>) response.get("errors");
 
-        if (errorMessages.size() > 0) {
+        User newUser = null;
+        if (response.get("user") != null) {
+            newUser = (User) response.get("user");
+        }
+
+        if (errorMessages != null) {
             model.addAttribute("errors", errorMessages);
-            model.addAttribute("user", formData);
+            model.addAttribute("user", userData);
 
             return Path.Template.USER_PROFILE;
         }
 
+        sessionData.setUser(newUser);
         return "redirect:" + Path.Web.USER_PROFILE_SUCCESSFUL_EDIT;
     }
 

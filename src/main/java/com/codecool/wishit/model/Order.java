@@ -28,6 +28,9 @@ public class Order {
     private String shippingAddress;
     private String orderLogFilename;
 
+    public Order() {
+    }
+
     public Order(int id, int userId, String orderLogFileName) {
         this.id = id;
         this.userId = userId;
@@ -36,27 +39,9 @@ public class Order {
         this.orderLogFilename = orderLogFileName;
     }
 
-    public Order(int id, int userId, Status status, List<LineItem> items, Date closedDate, float totalPrice, String fullName, String email,
-                 String phone, String billingCountry, String billingCity, String billingZipCode, String billingAddress,
-                 String shippingCountry, String shippingCity, String shippingZipCode, String shippingAddress, String orderLogFilename) {
-        this.id = id;
-        this.userId = userId;
-        this.status = status;
+    public Order(List<LineItem> items, float totalPrice) {
         this.items = items;
-        this.closedDate = closedDate;
         this.totalPrice = totalPrice;
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
-        this.billingCountry = billingCountry;
-        this.billingCity = billingCity;
-        this.billingZipCode = billingZipCode;
-        this.billingAddress = billingAddress;
-        this.shippingCountry = shippingCountry;
-        this.shippingCity = shippingCity;
-        this.shippingZipCode = shippingZipCode;
-        this.shippingAddress = shippingAddress;
-        this.orderLogFilename = orderLogFilename;
     }
 
     public int getId() {
@@ -131,7 +116,80 @@ public class Order {
         return orderLogFilename;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setItems(List<LineItem> items) {
+        this.items = items;
+    }
+
+    public void setClosedDate(Date closedDate) {
+        this.closedDate = closedDate;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setBillingCountry(String billingCountry) {
+        this.billingCountry = billingCountry;
+    }
+
+    public void setBillingCity(String billingCity) {
+        this.billingCity = billingCity;
+    }
+
+    public void setBillingZipCode(String billingZipCode) {
+        this.billingZipCode = billingZipCode;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public void setShippingCountry(String shippingCountry) {
+        this.shippingCountry = shippingCountry;
+    }
+
+    public void setShippingCity(String shippingCity) {
+        this.shippingCity = shippingCity;
+    }
+
+    public void setShippingZipCode(String shippingZipCode) {
+        this.shippingZipCode = shippingZipCode;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public void setOrderLogFilename(String orderLogFilename) {
+        this.orderLogFilename = orderLogFilename;
+    }
+
     public Integer countCartItems() {
         return this.items.size();
     }
+
 }
