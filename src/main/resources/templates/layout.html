@@ -24,6 +24,7 @@
             crossorigin="anonymous" defer></script>
 
     <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/products.css" rel="stylesheet" />
 
     <!-- Title formatted as title-pattern specifies -->
     <title layout:title-pattern="$CONTENT_TITLE - WishIt Shop">WishIt Shop</title>
@@ -74,6 +75,7 @@
                     <th:block th:unless="${loggedIn}">
                         <div class="col-xs-6 left text-left">
                             <a class="btn" th:href="@{~/}">Products</a>
+                            <a class="btn" th:href="@{~/upload-product}">Upload product</a>
                         </div>
                         <div class="col-xs-6 right text-right">
                             <a th:href="@{~/register}" class="btn">Register</a>

@@ -1,0 +1,82 @@
+body {
+    background-color: #337ab7;
+    color: #337ab7;
+    box-sizing: border-box;
+}
+
+.jumbotron {
+    color: #337ab7;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+#category-selection {
+    /*padding: 3px;*/
+    margin: 5px;
+    width: auto;
+}
+
+.well {
+    background: #eee none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 30px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#list-by-category {
+    position: relative;
+}
+
+.delete-filter-button {
+    position: absolute;
+    top: 10px;
+    visibility: hidden;
+    padding: 2px;
+}
+
+#list-by-category:hover .delete-filter-button {
+    visibility: visible;
+}
+
+.equal {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+    justify-content: space-around;
+}
+
+.card {
+    color: #333;
+    background-color: #eee;
+    margin: 10px 0;
+    padding: 30px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    /*transition: all 0.1s linear;*/
+}
+
+.card:hover {
+    text-decoration: none;
+    /*box-shadow: 0 5px 15px #999;*/
+}
+
+.thumbnail {
+    background: #eee none;
+}
+
+.panel {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}

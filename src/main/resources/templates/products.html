@@ -12,26 +12,23 @@
 <th:block layout:fragment="content">
 
     <!-- TODO: this can be used for category selection if needed -->
-    <!--<div class="well well-sm text-center">
+    <div class="well well-sm text-center row">
 
-        <form id="list-by-category" action="/" method="GET" class="inline-form">
+        <form class="text-center" id="list-by-category" action="/filter" method="GET" class="form form-inline">
             <label for="category-selection">Choose a category:</label>
-            <select id="category-selection" name="category-id">
-                <option th:each="category : ${allCategories}" th:attr="value=${category.id}" th:text="${category.name}">Categories</option>
+            <select class="form-control" id="category-selection" name="category" onchange="this.form.submit()">
+                <option value="">-- all products --</option>
+                <option th:each="type : ${types}" th:attr="value=${type}" th:text="${type}"
+                        th:selected="(${categoryFilter} == ${type}) ? 'selected' : 'false'">Categories</option>
             </select>
-            <input type="submit" value="Select" class="select-cat-sup" />
         </form>
 
     </div>
 
-    <div class="well well-sm">
-        <strong th:text="${actualSelection}">Category Title</strong>
-    </div>-->
-
     <div id="products" class="row list-group">
 
-        <div class="item col-xs-4 col-lg-4" th:each="prod : ${products}">
-            <div class="thumbnail">
+        <div class="item col-xs-12 col-sm-4 col-lg-4 equal" th:each="prod : ${products}">
+            <div class="thumbnail card">
                 
                 <!-- Product Image-->
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/' + ${prod.imageFileName}" alt="" />
@@ -41,7 +38,7 @@
                     <!-- Product Name -->
                     <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
                     <!-- Product Description -->
-                    <p class="group inner list-group-item-text" th:text="${#strings.substring(prod.description, 0, 25) + '...'}">Product description... </p>
+                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
                     
                     <div class="row">
                         
