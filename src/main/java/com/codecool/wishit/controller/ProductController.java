@@ -1,9 +1,6 @@
 package com.codecool.wishit.controller;
 
-import com.codecool.wishit.model.Order;
-import com.codecool.wishit.model.Product;
-import com.codecool.wishit.model.Review;
-import com.codecool.wishit.model.User;
+import com.codecool.wishit.model.*;
 import com.codecool.wishit.service.OrderService;
 import com.codecool.wishit.service.ProductService;
 import com.codecool.wishit.service.ReviewService;
@@ -13,6 +10,7 @@ import com.codecool.wishit.utils.RequestUtil;
 import com.codecool.wishit.utils.SessionData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -123,11 +121,21 @@ public class ProductController {
     public String productDetails(Model model,
                                  @PathVariable("productId") Integer productId) {
         Product product = productService.getProductById(productId);
-        List<Review> reviews = reviewService.getReviewsByProductId(productId);
-        System.out.println(reviews);
+        List<ProductReview> reviews = reviewService.getReviewsByProductId(productId);
         model.addAttribute("product", product);
         model.addAttribute("reviews", reviews);
         return "product-details";
+    }
+
+    @PostMapping(value = "/products/{productId}/review")
+    public String sendProductReview(@PathVariable("productId") Integer productId,
+                                    @RequestParam("text") String text,
+                                    @RequestParam("star") Integer star) {
+        // Todo: delete constant
+        Integer userId = 1;
+        reviewService.sendProductReview(text, star, userId, productId);
+
+        return "redirect:/products/" + productId;
     }
 
 }
