@@ -33,4 +33,9 @@ public class Path {
         public static final String UPLOAD_PRODUCT = "upload-product";
     }
 
+    public static class MicroServices {
+        public static final String PRODUCT_SERVICE = "http://wishit-product-service.herokuapp.com";
+        public static final String REVIEW_SERVICE = "https://product-review-service.herokuapp.com";
+    }
+
 }
