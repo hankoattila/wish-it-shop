@@ -9,6 +9,7 @@ public class Path {
         public static final String LOGOUT = "logout";
         public static final String USER_PROFILE = "profile";
         public static final String USER_PROFILE_SUCCESSFUL_EDIT = "profile?edited=successful";
+        public static final String UPLOAD_PRODUCT = "upload-product";
     }
 
     public static class Template {
@@ -17,6 +18,7 @@ public class Path {
         public static final String LOGIN = "login";
         public static final String LOGOUT = "logout";
         public static final String USER_PROFILE = "profile";
+        public static final String UPLOAD_PRODUCT = "upload-product";
     }
 
 }

@@ -14,27 +14,20 @@
     <!-- TODO: this can be used for category selection if needed -->
     <div class="well well-sm text-center row">
 
-        <form id="list-by-category" action="/filter" method="GET" class="form">
+        <form class="text-center" id="list-by-category" action="/filter" method="GET" class="form form-inline">
             <label for="category-selection">Choose a category:</label>
-            <select id="category-selection" name="category" onchange="this.form.submit()">
+            <select class="form-control" id="category-selection" name="category" onchange="this.form.submit()">
                 <option value="">-- all products --</option>
-                <!--<option selected disabled>Choose one category to filter</option>-->
                 <option th:each="type : ${types}" th:attr="value=${type}" th:text="${type}"
                         th:selected="(${categoryFilter} == ${type}) ? 'selected' : 'false'">Categories</option>
             </select>
-            <a href="/" class="btn delete-filter-button" title="Delete filter">X</a>
-            <!--<input type="submit" value="Select" class="select-cat-sup" />-->
         </form>
 
     </div>
 
-    <!--<div class="well well-sm" th:if="${categoryFilter}">-->
-        <!--<strong th:text="${categoryFilter}">Category Title</strong>-->
-    <!--</div>-->
-
     <div id="products" class="row list-group">
 
-        <div class="item col-xs-4 col-lg-4 equal" th:each="prod : ${products}">
+        <div class="item col-xs-12 col-sm-4 col-lg-4 equal" th:each="prod : ${products}">
             <div class="thumbnail card">
                 
                 <!-- Product Image-->

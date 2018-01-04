@@ -12,8 +12,9 @@ body {
 }
 
 #category-selection {
-    padding: 3px;
+    /*padding: 3px;*/
     margin: 5px;
+    width: auto;
 }
 
 .well {
@@ -32,7 +33,7 @@ body {
 
 .delete-filter-button {
     position: absolute;
-    top: 7px;
+    top: 10px;
     visibility: hidden;
     padding: 2px;
 }

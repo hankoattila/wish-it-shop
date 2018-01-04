@@ -1,8 +1,13 @@
 package com.codecool.wishit.service;
 
 import com.codecool.wishit.model.Product;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
@@ -53,6 +58,28 @@ public class ProductService {
             products.add(new Product("The last soap from Fight Club", "Be clean. Be a fighter. Be a weapon.", 25.9f, "soap.jpg"));
 
             return products;
+        }
+    }
+
+    public void saveProduct(Product product, Integer userId) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("name", product.getName());
+            params.add("type", product.getType());
+            params.add("description", product.getDescription());
+            params.add("imageFileName", product.getImageFileName());
+            params.add("defaultPrice", Float.toString(product.getDefaultPrice()));
+            params.add("defaultCurrency", "HUF");
+
+            HttpEntity<?> request = new HttpEntity<>(params, headers);
+            restTemplate.postForLocation("http://localhost:60005/" + userId + "/products", request);
+        } catch (ResourceAccessException e) {
+            System.out.println("Product Service is unavailable: " + e);
         }
     }
 

@@ -21,7 +21,17 @@ public class Product {
         this.description = description;
         this.defaultPrice = defaultPrice;
         this.imageFileName = imageFileName;
-        this.defaultCurrency = Currency.getInstance("USD");
+        this.defaultCurrency = Currency.getInstance("HUF");
+    }
+
+    public Product(String name, String type, String description, String imageFileName, float defaultPrice) {
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.imageFileName = imageFileName;
+        this.defaultPrice = defaultPrice;
+        this.defaultCurrency = Currency.getInstance("HUF");
+        this.reserved = true;
     }
 
     public String getName() {
