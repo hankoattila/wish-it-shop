@@ -1,6 +1,7 @@
 package com.codecool.wishit.service;
 
 import com.codecool.wishit.model.*;
+import com.codecool.wishit.utils.Path;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,7 +29,7 @@ public class OrderService {
             return null;
         }
 
-        final String URI = String.format("http://192.168.161.184:8080/order/%d", user.getUserId());
+        final String URI = String.format(Path.MicroServices.ORDER_SERVICE + "/order/%d", user.getUserId());
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -59,7 +60,7 @@ public class OrderService {
             return null;
         }
 
-        final String URI = "http://192.168.161.184:8080/api/add-to-cart";
+        final String URI = Path.MicroServices.ORDER_SERVICE + "/api/add-to-cart";
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -91,7 +92,7 @@ public class OrderService {
 
         Gson gson = new Gson();
 
-        final String URI = "http://192.168.161.184:8080/api/remove-from-cart";
+        final String URI = Path.MicroServices.ORDER_SERVICE + "/api/remove-from-cart";
 
         String response;
         RestTemplate restTemplate = new RestTemplate();
@@ -116,7 +117,7 @@ public class OrderService {
 
     public void setOrderStatusToPaid(Integer orderId) {
 
-        final String URI = "http://192.168.161.184:8080/api/set-order-to-paid";
+        final String URI = Path.MicroServices.ORDER_SERVICE + "/api/set-order-to-paid";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
