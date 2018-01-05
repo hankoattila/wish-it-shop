@@ -53,7 +53,6 @@ app.productLogic = {
     },
 
     handleRemoveLineItemError: function () {
-        app.utils.toastMessage("Item could not be removed from cart.");
+        // app.utils.toastMessage("Item could not be removed from cart.");
     }
-
 };
