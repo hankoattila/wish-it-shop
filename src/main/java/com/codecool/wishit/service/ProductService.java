@@ -101,27 +101,6 @@ public class ProductService {
         return types;
     }
 
-//<<<<<<< HEAD
-//    public Product getProductById(int productId) {
-//
-//        final String URI = String.format("http://wishit-product-service.herokuapp.com/products/%d", productId);
-//
-//        String response;
-//        RestTemplate restTemplate = new RestTemplate();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-//        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-//
-//        try {
-//            response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
-//        } catch (RestClientException e) {
-//            System.out.println(e.getMessage());
-//            return null;
-//        }
-//
-//        Gson gson = new Gson();
-//        return gson.fromJson(response, Product.class);
-//=======
     public Product getProductById(Integer productId) {
         try {
             RestTemplate restTemplate = new RestTemplate();
