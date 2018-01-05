@@ -127,8 +127,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .name-input {
-    margin: 5px;
-    padding: 5px 0;
+    /*margin: 5px;*/
+    /*padding: 5px 0;*/
+    /*width: 100%;*/
+}
+
+.col-form-label {
+    margin-top: 7px;
+    padding: 0 5px;
 }
 
 #exp-year {
@@ -156,9 +162,9 @@ input[type=number]::-webkit-outer-spin-button {
     padding-bottom: 0;
 }
 
-h1 {
-    margin-bottom: 50px;
-}
+/*h1 {*/
+    /*margin-bottom: 50px;*/
+/*}*/
 
 .balance {
     font-size: 0.9em;

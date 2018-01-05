@@ -61,7 +61,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12" th:if="${reviews.size() > 0}">
                 <h4 class="review-title">Reviews:</h4>
                 <div th:each="review : ${reviews}" class="review">
                     <p th:text="${review.text} + ' - ' + ${review.star}"></p>

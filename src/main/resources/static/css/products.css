@@ -15,7 +15,6 @@ body {
 }
 
 #category-selection {
-    /*padding: 3px;*/
     margin: 5px;
     width: auto;
 }
@@ -52,7 +51,7 @@ body {
     flex-flow: row wrap;
     -webkit-align-content: flex-end;
     align-content: flex-end;
-    justify-content: space-around;
+    flex-grow: inherit;
 }
 
 .card {
