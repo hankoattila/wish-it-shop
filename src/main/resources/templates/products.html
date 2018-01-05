@@ -26,9 +26,9 @@
 
     </div>
 
-    <div id="products" class="row list-group">
+    <div id="products" class="row list-group equal">
 
-        <div class="item col-xs-12 col-sm-4 col-lg-4 equal" th:each="prod : ${products}">
+        <div class="col-xs-12 col-sm-4 col-lg-4 " th:each="prod : ${products}">
             <div class="thumbnail card">
 
                 <!-- Product Image-->
@@ -47,7 +47,7 @@
                         <div class="row">
 
                             <!-- Product Unit Price -->
-                            <div class="col-xs-12 col-md-6">
+                            <div class="text-left col-xs-12">
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
 
@@ -58,7 +58,7 @@
                     </div>
                 </a>
                 <!-- Add to Cart button (shown only if logged in) -->
-                <div th:if="${loggedIn}" class="col-xs-12 col-md-6" th:id="${'product-id-' + prod.id}">
+                <div th:if="${loggedIn}" class="text-center" th:id="${'product-id-' + prod.id}">
                     <button class="btn btn-primary add-to-cart" th:attr="data-product-id=${prod.id}">Add to cart
                     </button>
                 </div>

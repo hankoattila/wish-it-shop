@@ -102,13 +102,20 @@ public class ProductController {
         System.out.println("upload");
         System.out.println(file);
 
-        File imageFile = new File("src/main/resources/static/img/" + file.getOriginalFilename());
+        String url1 = "src/main/resources/static/img/";
+        String url2 = "target/classes/static/img/";
+
+        File imageFile = new File(url1 + file.getOriginalFilename());
+        File imageFile2 = new File(url2 + file.getOriginalFilename());
         try {
             FileOutputStream outputStream = new FileOutputStream(imageFile);
+            FileOutputStream outputStream2 = new FileOutputStream(imageFile2);
             byte[] strToBytes = file.getBytes();
             outputStream.write(strToBytes);
+            outputStream2.write(strToBytes);
 
             outputStream.close();
+            outputStream2.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

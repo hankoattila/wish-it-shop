@@ -15,14 +15,14 @@
         <strong>Profile</strong>
     </div>
 
-    <div id="profile" class="row list-group">
+    <div id="profile" class="row list-group well">
 
         <div class="col-xs-12 col-lg-12">
 
             <div class="row">
 
                 <div class="row">
-                    <div class="col-xs-offset-2 col-xs-8 text-center">
+                    <div class="col-xs-offset-2 col-xs-8 text-left">
 
                         <div th:if="${success}" id="success-messages" class="alert alert-success">
                             <th:block th:each="message : ${success}">
@@ -46,7 +46,7 @@
 
                             <br>
 
-                            <h4 class="text-center"><strong>Billing Address</strong></h4>
+                            <h4 class="text-left"><strong>Billing Address</strong></h4>
                             <div class="form-group">
                                 <label class="form-control-label" for="bill-country">Country:</label>
                                 <input class="form-control" id="bill-country" placeholder="Country Name" name="billingCountry" th:value="${user.billingCountry}" required title="> 5 chars">
@@ -68,7 +68,7 @@
 
                             <br>
 
-                            <h4 class="text-center"><strong>Shipping Address</strong></h4>
+                            <h4 class="text-left"><strong>Shipping Address</strong></h4>
                             <div class="form-group">
                                 <label class="form-control-label" for="ship-country">Country:</label>
                                 <input class="form-control" id="ship-country" placeholder="Country Name" name="shippingCountry" th:value="${user.shippingCountry}" required title="> 5 chars">
