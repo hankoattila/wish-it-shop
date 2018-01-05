@@ -1,7 +1,6 @@
 package com.codecool.wishit.service;
 
 import com.codecool.wishit.model.ProductReview;
-import com.codecool.wishit.model.Review;
 import com.codecool.wishit.utils.Path;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.json.JacksonJsonParser;
