@@ -25,13 +25,16 @@ app.productLogic = {
             app.utils.toastMessage("New item successfully added to cart.");
             var cartItemCount = $("#cart-item-count");
             cartItemCount.text(Number(cartItemCount.text()) + 1);
+            location.reload();
         } else {
             app.utils.toastMessage("Item could not be added to cart.");
+            location.reload();
         }
     },
 
     handleAddToCartError: function (productId) {
         // app.utils.toastMessage("Failed to add to cart.");
+        location.reload();
     },
 
     handleRemoveLineItemSuccess: function (response, productId) {
@@ -50,9 +53,11 @@ app.productLogic = {
             table.remove();
             $("#proceed-to-checkout").remove();
         }
+        location.reload();
     },
 
     handleRemoveLineItemError: function () {
         // app.utils.toastMessage("Item could not be removed from cart.");
+        location.reload();
     }
 };
