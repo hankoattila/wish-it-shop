@@ -31,7 +31,7 @@ app.productLogic = {
     },
 
     handleAddToCartError: function (productId) {
-        app.utils.toastMessage("Failed to add to cart.");
+        // app.utils.toastMessage("Failed to add to cart.");
     },
 
     handleRemoveLineItemSuccess: function (response, productId) {

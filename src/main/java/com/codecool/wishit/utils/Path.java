@@ -37,6 +37,7 @@ public class Path {
         public static final String PRODUCT_SERVICE = "http://wishit-product-service.herokuapp.com";
 //        public static final String PRODUCT_SERVICE = "http://localhost:60005";
         public static final String REVIEW_SERVICE = "https://product-review-service.herokuapp.com";
+        public static final String ORDER_SERVICE = "https://wishit-order-service.herokuapp.com";
     }
 
 }

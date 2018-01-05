@@ -226,3 +226,8 @@ h2 {
 .order-title-acc {
     cursor: pointer;
 }
+
+form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
